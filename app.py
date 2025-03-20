@@ -3,16 +3,16 @@ from db import init_db, adicionar_compromisso_bd, listar_compromissos_bd, exclui
 
 app = Flask(__name__)
 
-# Inicializa o banco de dados (cria a tabela)
+
 init_db()
 
-# Rota para listar todos os compromissos
+# Rota para listar
 @app.route('/compromissos', methods=['GET'])
 def listar_compromissos():
     compromissos = listar_compromissos_bd()
     return jsonify([{'id': c[0], 'titulo': c[1], 'data': c[2], 'hora': c[3]} for c in compromissos])
 
-# Rota para adicionar um novo compromisso
+# Rota para adicionar
 @app.route('/compromisso', methods=['POST'])
 def adicionar_compromisso():
     dados = request.get_json()
@@ -24,10 +24,10 @@ def adicionar_compromisso():
 
 
 
-# Rota para deletar um compromisso
+# Rota para deletar
 @app.route('/compromisso/<string:titulo>', methods=['DELETE'])
 def excluir_compromisso(titulo):
-    excluir_compromisso_bd(titulo)  # Chama a função para excluir do banco de dados
+    excluir_compromisso_bd(titulo)  
     return jsonify({"message": "Compromisso deletado com sucesso", "titulo": titulo}), 200
 
 

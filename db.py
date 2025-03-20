@@ -1,8 +1,8 @@
 import sqlite3
 
-#criar o banco de dados e a tabela
+#criando o banco de dados e a tabela
 def init_db():
-    conn = sqlite3.connect('api_compromissos\\base_dados\\compromissos.db') 
+    conn = sqlite3.connect('base_dados\\compromissos.db')
     cursor = conn.cursor()
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS compromissos (
@@ -15,9 +15,9 @@ def init_db():
     conn.commit()
     conn.close()
 
-# adicionar um compromisso n
+# adicionando um compromisso
 def adicionar_compromisso_bd(titulo, data, hora):
-    conn = sqlite3.connect('api_compromissos\\base_dados\\compromissos.db')
+    conn = sqlite3.connect('base_dados\\compromissos.db')
     cursor = conn.cursor()
     cursor.execute('''
     INSERT INTO compromissos (titulo, data, hora)
@@ -26,9 +26,9 @@ def adicionar_compromisso_bd(titulo, data, hora):
     conn.commit()
     conn.close()
 
-# listar todos os compromissos
+# listando todos os compromissos
 def listar_compromissos_bd():
-    conn = sqlite3.connect('api_compromissos\\base_dados\\compromissos.db')
+    conn = sqlite3.connect('base_dados\\compromissos.db')
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM compromissos')
     compromissos = cursor.fetchall()
@@ -37,7 +37,7 @@ def listar_compromissos_bd():
 
 #excluindo compromisso
 def excluir_compromisso_bd(titulo):
-    conn = sqlite3.connect('api_compromissos\\base_dados\\compromissos.db')
+    conn = sqlite3.connect('base_dados\\compromissos.db')
     cursor = conn.cursor()
     cursor.execute('''DELETE FROM compromissos WHERE titulo = ?''', (titulo,))
     conn.commit()
